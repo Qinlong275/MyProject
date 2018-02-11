@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff">
+    <ImageView
+        android:id="@+id/phone_fileview"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/ic_phone_directory"/>
+
+    <TextView
+        android:id="@+id/phonre_file_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/phone_fileview"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="44dp"
+        android:textSize="18sp"
+        android:textColor="#e6000000"
+        android:text="我的文件夹"/>
+
+    <ImageView
+        android:id="@+id/mphone_fileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_phone_confirm"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp" />
+
+</RelativeLayout>

@@ -1,0 +1,4 @@
+IP：www.lcdzhao.cn
+端口: 10000
+第一层密码:mine00544
+控制密码:weizhao333

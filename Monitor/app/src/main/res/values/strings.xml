@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">穿梭</string>
+    <string name="title_activity_login">LoginActivity</string>
+</resources>

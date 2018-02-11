@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/user_bak">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="注册您的移动客户端"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="#fffefe"
+        android:layout_above="@+id/username"
+        android:layout_margin="50dp"/>
+
+    <LinearLayout
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5.2"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#00000000">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:text="名称:"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:id="@+id/nameEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/userpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="23dp"
+        android:layout_below="@+id/username">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5.2"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#00000000">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:text="密码:"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:id="@+id/passwordEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <ImageButton
+            android:id="@+id/affirm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_action_affirm"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
