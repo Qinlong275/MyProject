@@ -28,4 +28,8 @@ public interface AppinfoContract {
 
         void onLoadComplete();
     }
+
+    interface AppDetailview extends BaseView{
+        void showAppDetail(AppInfo appInfo);
+    }
 }

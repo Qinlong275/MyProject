@@ -76,16 +76,17 @@
         </android.support.design.widget.TextInputLayout>
 
 
-        <Button
+        <com.qinlong275.android.cniaoplay.ui.widget.LoadingButton
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:textColor="@color/color_w"
+            app:textColor="@color/color_w"
+            app:text="登录"
             android:background="@drawable/bg_btn"
-            android:enabled="false"
-            android:text="@string/login"
-            />
+
+            app:loadingText="正在登录"
+            app:progressColor="@color/colorAccent"/>
 
 
     </LinearLayout>

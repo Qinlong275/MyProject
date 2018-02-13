@@ -41,7 +41,7 @@ public abstract class ProgressSubscriber <T> extends ErrorHandleSubscriber<T> im
     public void onError(Throwable e) {
         BaseException baseException=mRxErrorHandler.handleError(e);
         mBaseView.showError(baseException.getDisplayMessage());
-        Log.d("123","error");
+        e.printStackTrace();
     }
 
     @Override

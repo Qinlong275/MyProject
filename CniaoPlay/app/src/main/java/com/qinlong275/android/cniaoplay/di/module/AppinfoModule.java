@@ -16,7 +16,7 @@ import dagger.Provides;
  * Created by 秦龙 on 2018/2/11.
  */
 
-@Module
+@Module(includes = AppModelModule.class)
 public class AppinfoModule {
     private AppinfoContract.AppinfoView mView;
 
@@ -29,14 +29,5 @@ public class AppinfoModule {
         return mView;
     }
 
-    @Provides
-    public RecommendAppAdapter provideAdapter(){
-//        return new RecommendAppAdapter()
-        return null;
-    }
 
-    @Provides
-    public AppInfoModel provideMode(ApiService apiService){
-        return new AppInfoModel(apiService);
-    }
 }

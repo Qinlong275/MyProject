@@ -24,7 +24,8 @@ import butterknife.Unbinder;
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity{
 
     private Unbinder mUnbinder;
-    private AppAplication mAppAplication;
+    protected AppAplication mAppAplication;
+
     @Inject
     T mPresenter;
 
@@ -46,10 +47,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
             mUnbinder.unbind();
         }
     }
-
-//    protected void startActivity(Class c){
-//        this.startActivity(new Intent(this,c));
-//    }
 
     public abstract int setLayout();
 

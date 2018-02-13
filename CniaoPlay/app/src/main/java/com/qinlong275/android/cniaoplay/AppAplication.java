@@ -2,6 +2,7 @@ package com.qinlong275.android.cniaoplay;
 
 import android.app.Application;
 import android.content.Context;
+import android.view.View;
 
 import com.google.gson.Gson;
 
@@ -16,6 +17,7 @@ import com.qinlong275.android.cniaoplay.di.module.HttpModule;
 
 public class AppAplication extends Application{
 
+    private View mView;
     private AppComponent mAppComponent;
 
     public AppComponent getAppComponent() {
@@ -25,6 +27,15 @@ public class AppAplication extends Application{
     public static AppAplication get(Context context){
         return (AppAplication)context.getApplicationContext();
     }
+
+    public View getView() {
+        return mView;
+    }
+
+    public void setView(View view) {
+        mView = view;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

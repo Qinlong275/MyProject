@@ -66,6 +66,9 @@ public class BaseException extends Exception {
     public static final int ERROR_HTTP_500=500;
 
 
+    //Token 失效
+    public static final int  ERROR_TOKEN=10010;
+
 
 
 

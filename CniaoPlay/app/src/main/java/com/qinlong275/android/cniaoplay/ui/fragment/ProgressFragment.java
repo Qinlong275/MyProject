@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qinlong275.android.cniaoplay.AppAplication;
 import com.qinlong275.android.cniaoplay.R;
@@ -35,7 +36,7 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
     private View mViewEmpty;
     private Unbinder mUnbinder;
 
-    private AppAplication mAppAplication;
+    protected AppAplication mAppAplication;
 
     @Inject
     T mPresenter ;
@@ -59,8 +60,7 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
         return mRootView;
     }
 
-    public void onEmptyClick() {
-    }
+    abstract void onEmptyClick();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -70,6 +70,7 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
         setupAcitivtyComponent(mAppAplication.getAppComponent());
         setRealContentView();
 
+        //初始化realcontent的界面
         init();
     }
 

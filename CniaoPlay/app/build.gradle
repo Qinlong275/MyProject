@@ -25,9 +25,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
 
 
     // icon
@@ -84,6 +85,10 @@ dependencies {
     compile 'com.jakewharton.rxbinding:rxbinding:1.0.1'
 
     compile 'com.hwangjr.rxbus:rxbus:1.0.5'
+
+    compile 'com.ms-square:expandableTextView:0.1.4'
+
+    compile 'com.zoonref:simple-view-behavior:1.0'
 
 
 }

@@ -1,12 +1,10 @@
 package com.qinlong275.android.cniaoplay.bean;
 
-import java.io.Serializable;
-
 /**
  * Created by 秦龙 on 2018/2/9.
  */
 
-public class BaseBean<T> implements Serializable {
+public class BaseBean<T> extends BaseEntity {
 
     public static final int SUCCESS=1;
     private int status;

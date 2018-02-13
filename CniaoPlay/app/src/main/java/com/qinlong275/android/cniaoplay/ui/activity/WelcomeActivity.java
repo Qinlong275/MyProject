@@ -29,7 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         mPathView.getPathAnimator()
                 .delay(100)
-                .duration(5000)
+                .duration(2000)
                 .interpolator(new AccelerateDecelerateInterpolator())
                 .listenerEnd(new PathView.AnimatorBuilder.ListenerEnd() {
                     @Override

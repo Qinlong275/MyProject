@@ -6,16 +6,16 @@ package com.qinlong275.android.cniaoplay.bean.RequestBean;
 
 public class LoginRequestBean {
 
-    private String phone;
+    private String email;
 
     private String password;
 
-    public String getPhone() {
-        return phone;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
