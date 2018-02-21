@@ -29,4 +29,9 @@ public class Constant {
     public static final String TOKEN = "token";
     public static final String USER = "user";
     public static final String CATEGORY = "category";
+    public static final String APK_DOWNLOAD_DIR = "apk_dl_dir";
+    public static final String APP_UPDATE_LIST = "app_update_list";
+    public static final String POSITION = "position";
+    public static final String HOT_APP= "hot_app";
+    public static final String HOT_GAME = "hot_game";
 }

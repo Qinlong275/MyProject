@@ -7,7 +7,8 @@ import com.qinlong275.android.cniaoplay.presenter.contract.CategoryContract;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
+
 
 /**
  * Created by 秦龙 on 2018/2/12.

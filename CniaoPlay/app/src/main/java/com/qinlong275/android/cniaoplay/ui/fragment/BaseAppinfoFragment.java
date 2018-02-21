@@ -12,13 +12,18 @@ import com.qinlong275.android.cniaoplay.R;
 import com.qinlong275.android.cniaoplay.bean.AppInfo;
 import com.qinlong275.android.cniaoplay.bean.PageBean;
 import com.qinlong275.android.cniaoplay.di.component.AppComponent;
+import com.qinlong275.android.cniaoplay.di.component.DaggerAppinfoComponent;
+import com.qinlong275.android.cniaoplay.di.module.AppinfoModule;
 import com.qinlong275.android.cniaoplay.presenter.AppinfoPresenter;
 import com.qinlong275.android.cniaoplay.presenter.contract.AppinfoContract;
 import com.qinlong275.android.cniaoplay.ui.activity.AppDetailActivity;
 import com.qinlong275.android.cniaoplay.ui.adapter.AppInfoAdapter;
 import com.qinlong275.android.cniaoplay.ui.decoration.DividerItemDecoration;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
+import zlc.season.rxdownload2.RxDownload;
 
 /**
  * Created by 秦龙 on 2018/2/11.
@@ -29,7 +34,10 @@ public abstract class BaseAppinfoFragment extends ProgressFragment<AppinfoPresen
     @BindView(R.id.recycle_view)
     RecyclerView mRecycleView;
 
-    private AppInfoAdapter mAppInfoAdapter;
+    @Inject
+    RxDownload mRxDownload;
+
+    protected AppInfoAdapter mAppInfoAdapter;
     int page=0;
 
     @Override
@@ -81,6 +89,14 @@ public abstract class BaseAppinfoFragment extends ProgressFragment<AppinfoPresen
             page++;
         }
         mAppInfoAdapter.setEnableLoadMore(appInfoPageBean.isHasMore());
+    }
+
+    @Override
+    public void setupAcitivtyComponent(AppComponent appComponent) {
+
+        DaggerAppinfoComponent.builder().appComponent(appComponent).appinfoModule(new AppinfoModule(this))
+                .build().injectTopListFragment(this);
+
     }
 
     @Override

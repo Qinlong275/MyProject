@@ -71,7 +71,7 @@ public class CategoryFragment extends ProgressFragment<CateogryPresenter> implem
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST);
 
         mRecycleView.addItemDecoration(itemDecoration);
-        mAdapter = new CategoryAdapter();
+        mAdapter = new CategoryAdapter(getActivity());
 
         mRecycleView.setAdapter(mAdapter);
 

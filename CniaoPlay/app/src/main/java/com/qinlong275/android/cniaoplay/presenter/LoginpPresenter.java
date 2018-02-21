@@ -1,8 +1,9 @@
 package com.qinlong275.android.cniaoplay.presenter;
 
-import com.hwangjr.rxbus.RxBus;
+
 import com.qinlong275.android.cniaoplay.bean.LoginBean;
 import com.qinlong275.android.cniaoplay.common.Constant;
+import com.qinlong275.android.cniaoplay.common.rx.RxBus;
 import com.qinlong275.android.cniaoplay.common.rx.RxHttpResponseCompat;
 import com.qinlong275.android.cniaoplay.common.rx.subscriber.ErrorHandleSubscriber;
 import com.qinlong275.android.cniaoplay.common.util.ACache;
@@ -10,6 +11,8 @@ import com.qinlong275.android.cniaoplay.common.util.VerificationUtils;
 import com.qinlong275.android.cniaoplay.presenter.contract.LoginContract;
 
 import javax.inject.Inject;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by 秦龙 on 2018/2/12.
@@ -33,12 +36,12 @@ public class LoginpPresenter extends BasePresenter<LoginContract.ILoginModel,Log
         mModel.login(phone,pwd).compose(RxHttpResponseCompat.<LoginBean>compatResult())
             .subscribe(new ErrorHandleSubscriber<LoginBean>(mContext) {
                 @Override
-                public void onStart() {
+                public void onSubscribe(Disposable d) {
                     mView.showLoading();
                 }
 
                 @Override
-                public void onCompleted() {
+                public void onComplete() {
                     mView.dismissLoading();
                 }
 
@@ -52,7 +55,7 @@ public class LoginpPresenter extends BasePresenter<LoginContract.ILoginModel,Log
                 public void onNext(LoginBean loginBean) {
                     mView.loginSuccess(loginBean);
                     saveuser(loginBean);
-                    RxBus.get().post(loginBean.getUser());
+                    RxBus.getDefault().post(loginBean.getUser());//发送数据
                 }
             });
     }

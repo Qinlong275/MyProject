@@ -6,7 +6,8 @@ import com.qinlong275.android.cniaoplay.ui.BaseView;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
+
 
 /**
  * Created by 秦龙 on 2018/2/12.

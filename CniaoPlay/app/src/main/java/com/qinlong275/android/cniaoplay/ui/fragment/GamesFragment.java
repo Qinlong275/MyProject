@@ -28,12 +28,12 @@ public class GamesFragment extends BaseAppinfoFragment {
 
     @Override
     AppInfoAdapter buideAdapter() {
-        return  AppInfoAdapter.builder().showPosition(false).showBrief(true).showCategoryName(true).build();
+        return  AppInfoAdapter.builder()
+                .showPosition(false)
+                .showBrief(true)
+                .showCategoryName(true)
+                .rxDownload(mRxDownload)
+                .build();
     }
 
-    @Override
-    public void setupAcitivtyComponent(AppComponent appComponent) {
-        DaggerAppinfoComponent.builder().appComponent(appComponent).appinfoModule(new AppinfoModule(this))
-                .build().injectGameFragment(this);
-    }
 }

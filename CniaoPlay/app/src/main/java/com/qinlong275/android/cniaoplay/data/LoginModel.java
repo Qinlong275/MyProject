@@ -6,7 +6,8 @@ import com.qinlong275.android.cniaoplay.bean.RequestBean.LoginRequestBean;
 import com.qinlong275.android.cniaoplay.data.http.ApiService;
 import com.qinlong275.android.cniaoplay.presenter.contract.LoginContract;
 
-import rx.Observable;
+import io.reactivex.Observable;
+
 
 /**
  * Created by 秦龙 on 2018/2/12.

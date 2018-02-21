@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CniaoPlay.iml" filepath="$PROJECT_DIR$/CniaoPlay.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rxdownload/rxdownload.iml" filepath="$PROJECT_DIR$/rxdownload/rxdownload.iml" />
     </modules>
   </component>
 </project>

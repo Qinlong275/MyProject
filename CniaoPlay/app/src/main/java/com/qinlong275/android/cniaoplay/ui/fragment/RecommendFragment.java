@@ -20,6 +20,7 @@ import com.qinlong275.android.cniaoplay.ui.adapter.IndexMultilAdapter;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import zlc.season.rxdownload2.RxDownload;
 
 
 /**
@@ -34,7 +35,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     RecyclerView mRecycleView;
 
     @Inject
-    ProgressDialog mProgressDialog;
+    RxDownload mRxDownload;
 
     @Override
     public int setLayout() {
@@ -67,7 +68,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     public void showResult(IndexBean indexBean) {
-        mAdapter=new IndexMultilAdapter(getActivity());
+        mAdapter=new IndexMultilAdapter(getActivity(),mRxDownload);
         mAdapter.setData(indexBean);
         mRecycleView.setAdapter(mAdapter);
     }

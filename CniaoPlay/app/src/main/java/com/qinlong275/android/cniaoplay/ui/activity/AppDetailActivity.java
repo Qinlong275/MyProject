@@ -25,7 +25,7 @@ import com.qinlong275.android.cniaoplay.common.Constant;
 import com.qinlong275.android.cniaoplay.common.imageloader.ImageLoader;
 import com.qinlong275.android.cniaoplay.common.util.DensityUtil;
 import com.qinlong275.android.cniaoplay.di.component.AppComponent;
-import com.qinlong275.android.cniaoplay.di.component.DaggerAppDetailComponent;
+
 import com.qinlong275.android.cniaoplay.di.module.AppModelModule;
 import com.qinlong275.android.cniaoplay.di.module.AppdetailModule;
 import com.qinlong275.android.cniaoplay.presenter.AppDetaiPresenter;

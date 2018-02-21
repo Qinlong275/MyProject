@@ -14,7 +14,8 @@ import com.qinlong275.android.cniaoplay.ui.activity.LoginActivity;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
-import retrofit2.adapter.rxjava.HttpException;
+import io.reactivex.disposables.Disposable;
+
 
 /**
  * Created by 秦龙 on 2018/2/9.
@@ -28,6 +29,11 @@ public abstract class ErrorHandleSubscriber<T> extends DefaultSubscriber<T> {
     public ErrorHandleSubscriber(Context context) {
         mRxErrorHandler = new RxErrorHandler(context);
         mContext=context;
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
     }
 
     @Override

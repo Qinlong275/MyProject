@@ -11,9 +11,10 @@ import com.qinlong275.android.cniaoplay.presenter.contract.AppinfoContract;
 
 import javax.inject.Inject;
 
-import retrofit2.Call;
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 
 /**
  * Created by 秦龙 on 2018/2/11.
@@ -29,6 +30,7 @@ public class AppinfoPresenter extends BasePresenter<AppInfoModel,AppinfoContract
     public static final int FEATURED=0;
     public static final int TOPLIST=1;
     public static final int NEWLIST=2;
+    public static final int HOT_APP_LIST=3;
 
     @Inject
     public AppinfoPresenter(AppInfoModel appInfoModel, AppinfoContract.AppinfoView toplistView) {
@@ -39,7 +41,7 @@ public class AppinfoPresenter extends BasePresenter<AppInfoModel,AppinfoContract
     public void  request(int type,int page,int categoryId,int flagType){
 
 
-        Subscriber subscriber =null;
+        Observer subscriber =null;
 
         if(page==0){
 
@@ -56,7 +58,7 @@ public class AppinfoPresenter extends BasePresenter<AppInfoModel,AppinfoContract
             // 加载下一页
             subscriber = new ErrorHandleSubscriber<PageBean<AppInfo>>(mContext) {
                 @Override
-                public void onCompleted() {
+                public void onComplete() {
 
                     mView.onLoadComplete();
                 }
@@ -124,6 +126,10 @@ public class AppinfoPresenter extends BasePresenter<AppInfoModel,AppinfoContract
                 else  if(flagType==NEWLIST){
 
                     return  mModel.getNewListAppsByCategory(categoryId,page);
+                }
+
+                else  if(flagType == HOT_APP_LIST){
+                    return  mModel.getHotApps(page);
                 }
 
 

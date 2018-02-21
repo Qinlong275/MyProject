@@ -19,11 +19,12 @@ import java.util.List;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<FragmentInfo> mFragments = new ArrayList<>(4);
+    private List<FragmentInfo> mFragments ;
 
-    public ViewPagerAdapter(FragmentManager fm) {
+    public ViewPagerAdapter(FragmentManager fm,List<FragmentInfo> fragments) {
         super(fm);
-        initFragments();
+//        initFragments();
+        mFragments=fragments;
     }
 
     private void initFragments() {

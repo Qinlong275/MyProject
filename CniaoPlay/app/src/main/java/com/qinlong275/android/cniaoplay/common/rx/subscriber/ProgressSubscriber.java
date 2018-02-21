@@ -8,22 +8,29 @@ import com.qinlong275.android.cniaoplay.common.exception.BaseException;
 import com.qinlong275.android.cniaoplay.common.util.ProgressDialogHandler;
 import com.qinlong275.android.cniaoplay.ui.BaseView;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by 秦龙 on 2018/2/10.
  */
 
-public abstract class ProgressSubscriber <T> extends ErrorHandleSubscriber<T> implements ProgressDialogHandler.OnProgressCancelListener{
+public abstract class ProgressSubscriber<T> extends ErrorHandleSubscriber<T> implements ProgressDialogHandler.OnProgressCancelListener {
 
     private BaseView mBaseView;
 
+    //判断是否订阅
+    private Disposable mDisposable;
+
     public ProgressSubscriber(Context context, BaseView baseView) {
         super(context);
-        mBaseView=baseView;
+        mBaseView = baseView;
     }
 
+
     @Override
-    public void onStart() {
-        if(isShowProgress()){
+    public void onSubscribe(Disposable d) {
+        mDisposable = d;
+        if (isShowProgress()) {
             mBaseView.showLoading();
         }
     }
@@ -33,20 +40,20 @@ public abstract class ProgressSubscriber <T> extends ErrorHandleSubscriber<T> im
     }
 
     @Override
-    public void onCompleted() {
-       mBaseView.dismissLoading();
+    public void onComplete() {
+        mBaseView.dismissLoading();
     }
 
     @Override
     public void onError(Throwable e) {
-        BaseException baseException=mRxErrorHandler.handleError(e);
+        BaseException baseException = mRxErrorHandler.handleError(e);
         mBaseView.showError(baseException.getDisplayMessage());
         e.printStackTrace();
     }
 
     @Override
     public void onCancelProgress() {
-        unsubscribe();
+        mDisposable.dispose();
     }
 
 }

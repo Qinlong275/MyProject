@@ -5,7 +5,8 @@ import com.qinlong275.android.cniaoplay.bean.BaseBean;
 import com.qinlong275.android.cniaoplay.bean.LoginBean;
 import com.qinlong275.android.cniaoplay.ui.BaseView;
 
-import rx.Observable;
+import io.reactivex.Observable;
+
 
 /**
  * 菜鸟窝http://www.cniao5.com 一个高端的互联网技能学习平台

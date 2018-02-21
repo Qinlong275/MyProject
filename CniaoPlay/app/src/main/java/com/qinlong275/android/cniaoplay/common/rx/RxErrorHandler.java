@@ -11,8 +11,7 @@ import com.qinlong275.android.cniaoplay.common.exception.ErrorMessageFactory;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
-import retrofit2.adapter.rxjava.HttpException;
-
+import retrofit2.HttpException;
 /**
  * 菜鸟窝http://www.cniao5.com 一个高端的互联网技能学习平台
  *

@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.google.gson.Gson;
 
+import com.mikepenz.iconics.Iconics;
+import com.qinlong275.android.cniaoplay.common.font.Cniao5Font;
 import com.qinlong275.android.cniaoplay.di.component.AppComponent;
 import com.qinlong275.android.cniaoplay.di.component.DaggerAppComponent;
 import com.qinlong275.android.cniaoplay.di.module.AppModule;
@@ -39,6 +41,13 @@ public class AppAplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //only required if you add a custom or generic font on your own
+        Iconics.init(getApplicationContext());
+        //register custom fonts like this (or also provide a font definition file)
+        Iconics.registerFont(new Cniao5Font());
+
+
         mAppComponent=DaggerAppComponent.builder().appModule(new AppModule(this))
                 .httpModule(new HttpModule()).build();
     }

@@ -1,6 +1,7 @@
 package com.qinlong275.android.cniaoplay.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +17,13 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qinlong275.android.cniaoplay.R;
 import com.qinlong275.android.cniaoplay.bean.Banner;
 import com.qinlong275.android.cniaoplay.bean.IndexBean;
+import com.qinlong275.android.cniaoplay.common.Constant;
 import com.qinlong275.android.cniaoplay.common.imageloader.ImageLoader;
+import com.qinlong275.android.cniaoplay.common.util.ACache;
+import com.qinlong275.android.cniaoplay.common.util.JsonUtils;
+import com.qinlong275.android.cniaoplay.ui.activity.HotAppActivity;
+import com.qinlong275.android.cniaoplay.ui.activity.HotGameActivity;
+import com.qinlong275.android.cniaoplay.ui.activity.SubjectActivity;
 import com.qinlong275.android.cniaoplay.ui.widget.BannerLayout;
 import com.qinlong275.android.cniaoplay.ui.widget.DividerItemDecoration;
 
@@ -25,6 +32,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import zlc.season.rxdownload2.RxDownload;
 
 /**
  * Created by 秦龙 on 2018/2/10.
@@ -46,9 +54,12 @@ public class IndexMultilAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private Context mContext;
 
-    public IndexMultilAdapter(Context context) {
+    private RxDownload mRxDownload;
+
+    public IndexMultilAdapter(Context context, RxDownload rxDownload) {
 
         mContext = context;
+        this.mRxDownload = rxDownload;
         mLayoutInflater = LayoutInflater.from(context);
     }
 
@@ -140,15 +151,24 @@ public class IndexMultilAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
 
-            AppInfoAdapter appInfoAdapter =  AppInfoAdapter.builder().showBrief(true).showCategoryName(false).showPosition(false).build();
+            AppInfoAdapter appInfoAdapter =  AppInfoAdapter.builder()
+                    .showBrief(true)
+                    .showCategoryName(false)
+                    .showPosition(false)
+                    .rxDownload(mRxDownload)
+                    .build();
 
             if(viewHolder.type==TYPE_APPS){
                 viewHolder.mText.setText("热门应用");
                 appInfoAdapter.addData(mIndexBean.getRecommendApps());
+                //缓存下来，在首页中间的按钮点击后页面获取
+                ACache.get(mContext).put(Constant.HOT_APP, JsonUtils.toJson(mIndexBean.getRecommendApps()));
             }
             else{
                 viewHolder.mText.setText("热门游戏");
                 appInfoAdapter.addData(mIndexBean.getRecommendGames());
+                //缓存下来，在首页中间的按钮点击后页面获取
+                ACache.get(mContext).put(Constant.HOT_GAME, JsonUtils.toJson(mIndexBean.getRecommendGames()));
             }
 
             viewHolder.mRecyclerView.setAdapter(appInfoAdapter);
@@ -170,7 +190,16 @@ public class IndexMultilAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onClick(View v) {
+        if(v.getId() == R.id.layout_hot_app){
+            mContext.startActivity(new Intent(mContext, HotAppActivity.class));
+        }
+        else if(v.getId() == R.id.layout_hot_subject){
 
+            mContext.startActivity(new Intent(mContext, SubjectActivity.class));
+        }
+        else if (v.getId()==R.id.layout_hot_game){
+            mContext.startActivity(new Intent(mContext, HotGameActivity.class));
+        }
     }
 
 

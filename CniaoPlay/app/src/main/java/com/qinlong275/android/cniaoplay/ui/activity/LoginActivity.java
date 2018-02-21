@@ -8,14 +8,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.jakewharton.rxbinding.view.RxView;
-import com.jakewharton.rxbinding.widget.RxTextView;
+
+import com.jakewharton.rxbinding2.InitialValueObservable;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.ionicons_typeface_library.Ionicons;
 import com.qinlong275.android.cniaoplay.R;
 import com.qinlong275.android.cniaoplay.bean.LoginBean;
 import com.qinlong275.android.cniaoplay.common.util.ACache;
 import com.qinlong275.android.cniaoplay.di.component.AppComponent;
+
 import com.qinlong275.android.cniaoplay.di.component.DaggerLoginComponent;
 import com.qinlong275.android.cniaoplay.di.module.LoginModule;
 import com.qinlong275.android.cniaoplay.presenter.LoginpPresenter;
@@ -26,11 +29,13 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func2;
-
-import static com.jakewharton.rxbinding.widget.RxTextView.textChanges;
+import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
+import zlc.season.rxdownload2.RxDownload;
+import zlc.season.rxdownload2.entity.DownloadFlag;
+import zlc.season.rxdownload2.entity.SingleMission;
 
 public class LoginActivity extends BaseActivity <LoginpPresenter> implements LoginContract.LoginView{
 
@@ -83,23 +88,28 @@ public class LoginActivity extends BaseActivity <LoginpPresenter> implements Log
             }
         });
 
-        Observable<CharSequence> obMobi = RxTextView.textChanges(mTxtMobi);
-        Observable<CharSequence> obPassword = RxTextView.textChanges(mTxtPassword);
-        Observable.combineLatest(obMobi, obPassword, new Func2<CharSequence, CharSequence, Boolean>() {
+        InitialValueObservable<CharSequence> obMobi = RxTextView.textChanges(mTxtMobi);
+        InitialValueObservable<CharSequence> obPassword = RxTextView.textChanges(mTxtPassword);
+
+
+        Observable.combineLatest(obMobi, obPassword, new BiFunction<CharSequence, CharSequence, Boolean>() {
             @Override
-            public Boolean call(CharSequence mobi, CharSequence pwd) {
-                return isPhoneValid(mobi.toString())&&isPasswordValid(pwd.toString());
+            public Boolean apply(@NonNull CharSequence mobi, @NonNull CharSequence pwd) throws Exception {
+                return isPhoneValid(mobi.toString()) && isPasswordValid(pwd.toString());
             }
-        }).subscribe(new Action1<Boolean>() {
+        }).subscribe(new Consumer<Boolean>() {
             @Override
-            public void call(Boolean aBoolean) {
-                RxView.enabled(mBtnLogin).call(aBoolean);
+            public void accept(@NonNull Boolean aBoolean) throws Exception {
+                RxView.enabled(mBtnLogin).accept(aBoolean);
             }
         });
 
-        RxView.clicks(mBtnLogin).subscribe(new Action1<Void>() {
+
+
+        RxView.clicks(mBtnLogin).subscribe(new Consumer<Object>() {
+
             @Override
-            public void call(Void aVoid) {
+            public void accept(@NonNull Object o) throws Exception {
                 mPresenter.login(mTxtMobi.getText().toString().trim(),mTxtPassword.getText().toString().trim());
             }
         });

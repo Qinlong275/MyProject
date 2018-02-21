@@ -26,19 +26,13 @@ public class ToplistFragment extends BaseAppinfoFragment{
 
 
     @Override
-    public void setupAcitivtyComponent(AppComponent appComponent) {
-        DaggerAppinfoComponent.builder().appComponent(appComponent).appinfoModule(new AppinfoModule(this))
-                .build().injectToplistFragment(this);
-    }
-
-    @Override
     int type() {
         return AppinfoPresenter.TOP_LIST;
     }
 
     @Override
     AppInfoAdapter buideAdapter() {
-        return  AppInfoAdapter.builder().showPosition(true).showBrief(false).showCategoryName(true).build();
+        return  AppInfoAdapter.builder().showPosition(true).showBrief(false).showCategoryName(true).rxDownload(mRxDownload).build();
     }
 
 }
