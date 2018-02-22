@@ -66,9 +66,10 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="net.csdn.blog.ruancoder.fileprovider"
+            android:authorities="com.qinlong275.android.cniaoplay.fileprovider"
+            android:grantUriPermissions="true"
             android:exported="false"
-            android:grantUriPermissions="true">
+            >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
@@ -81,6 +82,8 @@
         <activity android:name=".ui.activity.SubjectActivity">
         </activity>
         <activity android:name=".ui.activity.SearchActivity">
+        </activity>
+        <activity android:name=".ui.activity.SettingActivity">
         </activity>
     </application>
 

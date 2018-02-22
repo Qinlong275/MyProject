@@ -117,6 +117,7 @@ public class MainActivity extends BaseActivity <MainPresenter> implements MainCo
     @Override
     public void init() {
 
+        //从设置页面取得安装信息
         boolean key_smart_install= getSharedPreferences(getPackageName()+"_preferences",MODE_PRIVATE).getBoolean("key_smart_install",false);
 
         Log.d("MainActivity","key_smart_install="+key_smart_install);
@@ -229,7 +230,23 @@ public class MainActivity extends BaseActivity <MainPresenter> implements MainCo
                         break;
                     case R.id.menu_download_manager:
 
-                        startActivity(new Intent(MainActivity.this,AppMangerActivity.class));
+                        toAppManagerActivity(1);
+
+                        break;
+                    case R.id.menu_app_uninstall:
+
+                        toAppManagerActivity(3);
+
+                        break;
+                    case R.id.menu_app_update:
+
+                        toAppManagerActivity(2);
+
+                        break;
+
+                    case R.id.menu_setting:
+
+                        startActivity(new Intent(MainActivity.this,SettingActivity.class));
 
                         break;
 

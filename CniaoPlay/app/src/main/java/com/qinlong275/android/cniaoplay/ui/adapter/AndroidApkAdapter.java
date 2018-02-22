@@ -14,6 +14,8 @@ import com.qinlong275.android.cniaoplay.common.util.AppUtils;
 import com.qinlong275.android.cniaoplay.common.util.PackageUtils;
 import com.qinlong275.android.cniaoplay.ui.widget.DownloadProgressButton;
 
+import java.io.File;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -101,7 +103,10 @@ public class AndroidApkAdapter extends BaseQuickAdapter<AndroidApk,BaseViewHolde
 
                         if(obj==null){
 
-                            PackageUtils.install(mContext,item.getApkPath());
+                            File file=new File(item.getApkPath());
+                            PackageUtils.installApk(mContext,file);
+//
+//                            PackageUtils.install(mContext,item.getApkPath());
 
                         }
                         else{
@@ -111,7 +116,9 @@ public class AndroidApkAdapter extends BaseQuickAdapter<AndroidApk,BaseViewHolde
                                 deleteApk(item);
                             }
                             else {
-                                PackageUtils.install(mContext,item.getApkPath());
+                                File file=new File(item.getApkPath());
+                                PackageUtils.installApk(mContext,file);
+//                                PackageUtils.install(mContext,item.getApkPath());
                             }
                         }
                     }

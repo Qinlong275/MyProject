@@ -11,6 +11,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -44,47 +45,54 @@ public class PackageUtils {
     public static final int APP_INSTALL_INTERNAL = 1;
     public static final int APP_INSTALL_EXTERNAL = 2;
 
+
     /**
-     * install according conditions
-     * <ul>
-     * <li>if system application or rooted, see {@link #installSilent(Context, String)}</li>
-     * <li>else see {@link #installNormal(Context, String)}</li>
-     * </ul>
+     * 安装 apk 文件
      *
-     * @param context
-     * @param path
-     * @return
+     * @param apkFile
      */
-    public static final int install(Context context, String path) {
-        String filePath=path+".apk";
-        if (PackageUtils.isSystemApplication(context) || ShellUtils.checkRootPermission()) {
-            return installSilent(context, filePath);
+    public static void installApk(Context context,File apkFile) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(context, "com.qinlong275.android.cniaoplay.fileprovider", apkFile);
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
-        else
-            return installNormal(context, filePath) ? INSTALL_SUCCEEDED : INSTALL_FAILED_INVALID_URI;
+        if (context.getPackageManager().queryIntentActivities(intent, 0).size() > 0) {
+            context.startActivity(intent);
+        }
     }
 
-    /**
-     * install package normal by system intent
-     *
-     * @param context
-     * @param filePath file path of package
-     * @return whether apk exist
-     */
-    public static boolean installNormal(Context context, String filePath) {
 
+//    public static final int install(Context context, String path) {
+//        String filePath=path+".apk";
+//        if (PackageUtils.isSystemApplication(context) || ShellUtils.checkRootPermission()) {
+//            return installSilent(context, filePath);
+//        }
+//        else
+//            return installNormal(context, filePath) ? INSTALL_SUCCEEDED : INSTALL_FAILED_INVALID_URI;
+//    }
+
+    //apk智能安装
+    public static boolean installSmart(Context context, File apkFile) {
 
         if(isAccessibilityEnabled(context, InstallAccessibilityService.class.getCanonicalName())){
 
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            File file = new File(filePath);
-            if (file == null || !file.exists() || !file.isFile() || file.length() <= 0) {
-                return false;
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                Uri contentUri = FileProvider.getUriForFile(context, "com.qinlong275.android.cniaoplay.fileprovider", apkFile);
+                intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+            } else {
+                intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             }
-
-            i.setDataAndType(Uri.parse("file://" + filePath), "application/vnd.android.package-archive");
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
+            if (context.getPackageManager().queryIntentActivities(intent, 0).size() > 0) {
+                context.startActivity(intent);
+            }
             return true;
         }
         else {

@@ -192,8 +192,9 @@ public class DownloadButtonConntroller {
         Log.d("downloadcontroler","开始安装");
 //        mRxDownload.getRealFiles()
         String path = ACache.get(context).getAsString(Constant.APK_DOWNLOAD_DIR) + File.separator + appInfo.getReleaseKeyHash();
-
-        PackageUtils.install(context,path);
+        File file=new File(path+".apk");
+        PackageUtils.installApk(context,file);
+//        PackageUtils.installSmart(context,file);
     }
 
     private void startDownload(final DownloadProgressButton btn, final AppInfo appInfo) {
@@ -400,7 +401,7 @@ public class DownloadButtonConntroller {
 
                 case DownloadFlag.COMPLETED: //已完成
                     btn.setText("安装");
-                    installApp(btn.getContext(),mAppInfo);
+//                    installApp(btn.getContext(),mAppInfo);
                     break;
                 case DownloadFlag.FAILED://下载失败
                     btn.setText("失败");

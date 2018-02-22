@@ -143,10 +143,14 @@ public class AppDetailFragment extends ProgressFragment<AppDetaiPresenter> imple
 
         List<String> urls = Arrays.asList(screentShot.split(","));
 
-
         for (String url : urls) {
 
             ImageView imageView = (ImageView) mInflater.inflate(R.layout.template_imageview, mViewGallery, false);
+            imageView.setAdjustViewBounds(true);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(480,640);
+            imageView.setLayoutParams(layoutParams);
 
             ImageLoader.load(Constant.BASE_IMG_URL + url, imageView);
 

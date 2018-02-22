@@ -41,6 +41,6 @@ public class HotGameFragment extends BaseAppinfoFragment{
 
     @Override
     AppInfoAdapter buideAdapter() {
-        return AppInfoAdapter.builder().showPosition(true).showBrief(false).showCategoryName(true).rxDownload(mRxDownload).build();
+        return AppInfoAdapter.builder().showPosition(false).showBrief(false).showCategoryName(true).rxDownload(mRxDownload).build();
     }
 }

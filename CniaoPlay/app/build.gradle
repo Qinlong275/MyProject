@@ -88,6 +88,8 @@ dependencies {
 
 
     compile project(path: ':rxdownload')
+
+    compile 'cn.qqtheme.framework:FilePicker:1.5.1'
 }
 
 

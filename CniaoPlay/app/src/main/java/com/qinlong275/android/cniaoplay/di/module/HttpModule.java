@@ -35,26 +35,6 @@ public class HttpModule {
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-        //加上可能会导致内存溢出
-
-//        if(BuildConfig.DEBUG){
-//            // log用拦截器
-//            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//
-//            // 开发模式记录整个body，否则只记录基本信息如返回200，http协议版本等
-//            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-//
-//            builder.addInterceptor(logging);
-//
-//        }
-
-
-
-
-
-        // 如果使用到HTTPS，我们需要创建SSLSocketFactory，并设置到client
-//        SSLSocketFactory sslSocketFactory = null;
-
         return builder
                 .addInterceptor(new CommonParamsInterceptor(gson,application))
 

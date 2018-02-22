@@ -3,6 +3,7 @@ package com.qinlong275.android.cniaoplay.service;
 import android.accessibilityservice.AccessibilityService;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
@@ -39,11 +40,12 @@ public class InstallAccessibilityService extends AccessibilityService {
         if(evenType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED ||
                 evenType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED)
         {
+            Log.d("666","智能安装");
 
             // 中文系统
-            click("安装");
+//            click("安装");
             click("下一步");
-            click("确定");
+            click("安装");
             click("完成");
 
             // 英文
@@ -52,6 +54,7 @@ public class InstallAccessibilityService extends AccessibilityService {
         }
 
     }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
