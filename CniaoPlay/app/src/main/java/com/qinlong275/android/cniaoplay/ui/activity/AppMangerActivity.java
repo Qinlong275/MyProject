@@ -40,6 +40,25 @@ public class AppMangerActivity extends BaseActivity {
 
     private  int position;
 
+    @Override
+    public int setLayout() {
+        return R.layout.activity_app_manger;
+    }
+
+    @Override
+    public void setupActivityComponent(AppComponent appComponent) {
+
+    }
+
+    @Override
+    public void init() {
+        position = getIntent().getIntExtra(Constant.POSITION,0);
+        initToolbar();
+        initTablayout();
+
+    }
+
+
     private void initToolbar() {
 
 
@@ -61,32 +80,13 @@ public class AppMangerActivity extends BaseActivity {
         mToolbar.setTitle(R.string.download_manager);
     }
 
-
-    @Override
-    public int setLayout() {
-        return R.layout.activity_app_manger;
-    }
-
-    @Override
-    public void setupActivityComponent(AppComponent appComponent) {
-
-    }
-
-    @Override
-    public void init() {
-        position = getIntent().getIntExtra(Constant.POSITION,0);
-        initToolbar();
-        initTablayout();
-
-    }
-
-
     private void initTablayout() {
 
 
 
 
         PagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),initFragments());
+        //设置默认后台加载页面数
         mViewPager.setOffscreenPageLimit(adapter.getCount());
         mViewPager.setAdapter(adapter);
 

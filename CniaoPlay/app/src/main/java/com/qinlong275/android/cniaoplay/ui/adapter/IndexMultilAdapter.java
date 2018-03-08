@@ -1,5 +1,6 @@
 package com.qinlong275.android.cniaoplay.ui.adapter;
 
+import com.qinlong275.android.cniaoplay.AppAplication;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,12 +16,14 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qinlong275.android.cniaoplay.R;
+import com.qinlong275.android.cniaoplay.bean.AppInfo;
 import com.qinlong275.android.cniaoplay.bean.Banner;
 import com.qinlong275.android.cniaoplay.bean.IndexBean;
 import com.qinlong275.android.cniaoplay.common.Constant;
 import com.qinlong275.android.cniaoplay.common.imageloader.ImageLoader;
 import com.qinlong275.android.cniaoplay.common.util.ACache;
 import com.qinlong275.android.cniaoplay.common.util.JsonUtils;
+import com.qinlong275.android.cniaoplay.ui.activity.AppDetailActivity;
 import com.qinlong275.android.cniaoplay.ui.activity.HotAppActivity;
 import com.qinlong275.android.cniaoplay.ui.activity.HotGameActivity;
 import com.qinlong275.android.cniaoplay.ui.activity.SubjectActivity;
@@ -56,9 +59,11 @@ public class IndexMultilAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private RxDownload mRxDownload;
 
-    public IndexMultilAdapter(Context context, RxDownload rxDownload) {
+    private AppAplication mAplication;
 
+    public IndexMultilAdapter(Context context, RxDownload rxDownload) {
         mContext = context;
+        mAplication=(AppAplication)context.getApplicationContext();
         this.mRxDownload = rxDownload;
         mLayoutInflater = LayoutInflater.from(context);
     }
@@ -151,7 +156,7 @@ public class IndexMultilAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
 
-            AppInfoAdapter appInfoAdapter =  AppInfoAdapter.builder()
+            final AppInfoAdapter appInfoAdapter =  AppInfoAdapter.builder()
                     .showBrief(true)
                     .showCategoryName(false)
                     .showPosition(false)
@@ -176,7 +181,12 @@ public class IndexMultilAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             viewHolder.mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
                 @Override
                 public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                    AppInfo appInfo=appInfoAdapter.getItem(position);
+                    mAplication.setView(view);
+                    Intent intent=new Intent(mContext, AppDetailActivity.class);
+                    //要实现serializable接口的
+                    intent.putExtra("appinfo",appInfo);
+                    mContext.startActivity(intent);
                 }
             });
         }
@@ -233,7 +243,6 @@ public class IndexMultilAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-
     class AppViewHolder extends RecyclerView.ViewHolder {
 
 
@@ -270,7 +279,6 @@ public class IndexMultilAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             DividerItemDecoration itemDecoration = new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL_LIST);
 
             mRecyclerView.addItemDecoration(itemDecoration);
-
         }
     }
 

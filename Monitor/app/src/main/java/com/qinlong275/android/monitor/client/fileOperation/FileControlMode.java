@@ -37,6 +37,7 @@ public class FileControlMode {
 	public FileControlMode(int port) {
 		// TODO Auto-generated constructor stub
 		try {
+			//f服务端问自己获取的filesocket
 			this.filesSocket = new Socket(Server.getServerIp(), port);
 		//	this.filesSocket.setKeepAlive(true);
 			this.isAlive = true;

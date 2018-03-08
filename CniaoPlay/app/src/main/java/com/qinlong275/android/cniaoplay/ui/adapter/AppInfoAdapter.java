@@ -27,10 +27,12 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo,BaseViewHolder> {
     private Builder mBuilder;
 
     private AppInfoAdapter(Builder builder) {
+        //子项的布局，有默认
         super(builder.layoutId);
 
         this.mBuilder = builder;
 
+        //RxDownload是View传来的
         mDownloadButtonConntroller=new DownloadButtonConntroller(builder.mRxDownload);
 
         openLoadAnimation();
@@ -52,6 +54,7 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo,BaseViewHolder> {
         if (viewBtn instanceof  DownloadProgressButton){
 
             DownloadProgressButton btn = (DownloadProgressButton) viewBtn;
+            //处理具体的一个App的下载事件
             mDownloadButtonConntroller.handClick(btn,item);
         }
 
@@ -59,6 +62,7 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo,BaseViewHolder> {
         TextView textViewBrief = helper.getView(R.id.txt_brief);
         if(mBuilder.isUpdateStatus){
 
+            //可扩展的TextView
             ExpandableTextView viewChangeLog =helper.getView(R.id.view_changelog);
             viewChangeLog.setText(item.getChangeLog());
 
@@ -107,6 +111,7 @@ public class AppInfoAdapter extends BaseQuickAdapter<AppInfo,BaseViewHolder> {
     //建造者模式
     public static class  Builder{
 
+        //设置默认的布局，可以修改
         private int layoutId=R.layout.template_appinfo;
 
         private boolean isShowPosition;

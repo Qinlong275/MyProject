@@ -53,6 +53,7 @@ public class TalkWithOther {
      */
     public String listen() throws IOException {
         String response = reader.readLine();
+        //接收到beng beng不管，继续接受下一行
         while((response != null) && "beng beng".equals(response)) {
             isAlive = true;
         //    System.out.println("听到心跳");//防止在读消息的过程中突然
@@ -146,6 +147,7 @@ public class TalkWithOther {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+                //每隔一段时间检测一次，
                 if (talkWithServer.isAlive == true) {
                     talkWithServer.isAlive = false;
                 } else {

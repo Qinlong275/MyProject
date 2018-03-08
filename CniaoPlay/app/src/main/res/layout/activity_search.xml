@@ -48,6 +48,7 @@
                     android:textSize="16sp"/>
 
 
+                //X号
                 <ImageView
                     android:id="@+id/action_clear_btn"
                     android:layout_height="wrap_content"

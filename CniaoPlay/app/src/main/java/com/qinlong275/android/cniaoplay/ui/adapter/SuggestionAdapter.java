@@ -35,7 +35,5 @@ public class SuggestionAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
 
         helper.setText(R.id.txt_suggestion,item);
 
-
-
     }
 }

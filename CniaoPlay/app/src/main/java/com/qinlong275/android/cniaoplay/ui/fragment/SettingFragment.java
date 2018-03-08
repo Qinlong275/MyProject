@@ -79,6 +79,7 @@ public class SettingFragment extends PreferenceFragment {
             public void onFilePicked(String currentPath) {
 
                 pref.setSummary(currentPath);
+                //默认APK下载存储地址
                 ACache.get(getActivity()).put(Constant.APK_DOWNLOAD_DIR,currentPath);
             }
         });

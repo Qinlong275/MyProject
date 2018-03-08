@@ -1,5 +1,6 @@
 package com.qinlong275.android.cniaoplay.ui.activity;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.ionicons_typeface_library.Ionicons;
 import com.qinlong275.android.cniaoplay.R;
+import com.qinlong275.android.cniaoplay.bean.AppInfo;
 import com.qinlong275.android.cniaoplay.bean.SearchResult;
 import com.qinlong275.android.cniaoplay.common.rx.RxSchedulers;
 import com.qinlong275.android.cniaoplay.di.component.AppComponent;
@@ -110,19 +112,14 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     @Override
     public void init() {
 
-
         mPresenter.showHistory();
         initView();
-
-
 
         setupSearchView();
 
         setupSuggestionRecyclerView();
 
         initSearchResultRecycleView();
-
-
 
     }
 
@@ -198,7 +195,12 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
 
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                AppInfo appInfo=mAppInfoAdapter.getItem(position);
+                mAppAplication.setView(view);
+                Intent intent=new Intent(SearchActivity.this, AppDetailActivity.class);
+                //要实现serializable接口的
+                intent.putExtra("appinfo",appInfo);
+                startActivity(intent);
             }
         });
     }
@@ -316,13 +318,10 @@ public class SearchActivity extends BaseActivity<SearchPresenter> implements Sea
     @Override
     public void showSearchResult(SearchResult result) {
 
-
-
         mAppInfoAdapter.setNewData(result.getListApp());
         mRecyclerViewSuggestion.setVisibility(View.GONE);
         mLayoutHistory.setVisibility(View.GONE);
         mRecyclerViewResult.setVisibility(View.VISIBLE);
-
 
     }
 }

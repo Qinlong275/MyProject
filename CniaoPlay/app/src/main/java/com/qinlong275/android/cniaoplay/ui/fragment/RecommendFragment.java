@@ -34,6 +34,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     @BindView(R.id.recycle_view)
     RecyclerView mRecycleView;
 
+    //直接这样注入，则不用在Model中提供
     @Inject
     RxDownload mRxDownload;
 

@@ -36,6 +36,7 @@ public class HttpModule {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
         return builder
+                //添加公共参数
                 .addInterceptor(new CommonParamsInterceptor(gson,application))
 
                 // 连接超时时间设置

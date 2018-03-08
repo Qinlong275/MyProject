@@ -41,6 +41,7 @@ public class CategoryAdapter extends BaseQuickAdapter<Category,BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, Category item) {
 
+        //字体图标
         Drawable drawable=new IconicsDrawable(mContext)
                 .icon(Ionicons.Icon.ion_ios_arrow_right)
                 .color(Color.BLACK)

@@ -17,8 +17,8 @@ import com.qinlong275.android.monitor.client.connection.Server;
 public class DownloadThread extends Thread {
 	private int port;
 	private Socket downloadSocket = null;
-	private BufferedOutputStream dataOut = null;
-	private BufferedInputStream fileIn = null;
+	private BufferedOutputStream dataOut = null;		//将我的文件写到这个流中发出去
+	private BufferedInputStream fileIn = null;		//要下载的我的文件
 
 
 	public DownloadThread(String path, int port,BufferedInputStream fileIn) {

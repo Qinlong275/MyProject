@@ -69,6 +69,7 @@ public class DownloadButtonConntroller {
     }
 
 
+    //正在下载页面用
     public  void  handClick(final DownloadProgressButton btn, DownloadRecord record){
 
         AppInfo info =downloadRecord2AppInfo(record);
@@ -119,6 +120,7 @@ public class DownloadButtonConntroller {
                                         @Override
                                         public ObservableSource<DownloadEvent> apply(@NonNull AppDownloadInfo appDownloadInfo) throws Exception {
 
+                                            //设置下载信息
                                             appInfo.setAppDownloadInfo(appDownloadInfo);
 
                                             return receiveDownloadStatus(appDownloadInfo.getDownloadUrl());
@@ -133,6 +135,8 @@ public class DownloadButtonConntroller {
                 })
                 .compose(RxSchedulers.<DownloadEvent>io_main())
 
+                //传输的是DownloadEvent
+                //appinfo里已经有下载信息
                 .subscribe(new DownloadConsumer(btn,appInfo));
 
 
@@ -246,6 +250,7 @@ public class DownloadButtonConntroller {
 
         mRxDownload.serviceDownload(appInfo2DownloadBean(info)).subscribe();
 
+        //在初始第一次进入界面时应该也接受状态！！！
         mRxDownload.receiveDownloadStatus(info.getAppDownloadInfo().getDownloadUrl()).subscribe(new DownloadConsumer(btn,info));
 
     }
@@ -342,6 +347,7 @@ public class DownloadButtonConntroller {
 
     public Observable<DownloadEvent> receiveDownloadStatus(String url){
 
+        //得到下载信息，包括百分比等，RxDownload有缓存，断点传输
         return  mRxDownload.receiveDownloadStatus(url);
     }
 
@@ -373,10 +379,13 @@ public class DownloadButtonConntroller {
 
             int flag = event.getFlag();
 
+            //button设置标志信息
             btn.setTag(R.id.tag_apk_flag,flag);
 
+            //控制button点击事件
             bindClick(btn,mAppInfo);
 
+            //控制button的显示
             switch (flag){
 
                 case DownloadFlag.INSTALLED:

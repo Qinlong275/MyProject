@@ -61,6 +61,7 @@ public class LoginpPresenter extends BasePresenter<LoginContract.ILoginModel,Log
     }
 
     private void saveuser(LoginBean bean){
+        //保存token用于时间验证是否失效
         ACache aCache=ACache.get(mContext);
         aCache.put(Constant.TOKEN,bean.getToken());
         aCache.put(Constant.USER,bean.getUser());

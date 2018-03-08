@@ -1,17 +1,23 @@
 package com.qinlong275.android.cniaoplay.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qinlong275.android.cniaoplay.R;
+import com.qinlong275.android.cniaoplay.bean.AppInfo;
 import com.qinlong275.android.cniaoplay.bean.Subject;
 import com.qinlong275.android.cniaoplay.bean.SubjectDetail;
 import com.qinlong275.android.cniaoplay.common.Constant;
 import com.qinlong275.android.cniaoplay.common.imageloader.ImageLoader;
+import com.qinlong275.android.cniaoplay.ui.activity.AppDetailActivity;
 import com.qinlong275.android.cniaoplay.ui.adapter.AppInfoAdapter;
 import com.qinlong275.android.cniaoplay.ui.decoration.DividerItemDecoration;
 
@@ -94,6 +100,18 @@ public class SubjectDetailFragment extends BaseSubjectFragment {
         mRecyclerView.addItemDecoration(itemDecoration);
 
         mRecyclerView.setAdapter(mAdapter);
+
+        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                AppInfo appInfo=mAdapter.getItem(position);
+                mAppAplication.setView(view);
+                Intent intent=new Intent(getActivity(), AppDetailActivity.class);
+                //要实现serializable接口的
+                intent.putExtra("appinfo",appInfo);
+                startActivity(intent);
+            }
+        });
 
     }
 

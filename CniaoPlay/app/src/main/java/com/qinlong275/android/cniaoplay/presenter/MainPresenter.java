@@ -74,6 +74,7 @@ public class MainPresenter extends BasePresenter<MainContract.IMainModel,MainCon
 
 
         getIntalledApps()
+                //将AppsUpdateBean转换成List<AppInfo>
                 .flatMap(new Function<AppsUpdateBean, ObservableSource<List<AppInfo>>>() {
             @Override
             public ObservableSource<List<AppInfo>> apply(@NonNull AppsUpdateBean params) throws Exception {
@@ -86,6 +87,7 @@ public class MainPresenter extends BasePresenter<MainContract.IMainModel,MainCon
 
                 if(appInfos !=null){
 
+                    //缓存起来，在真正的更新页面使用
                     ACache.get(mContext).put(Constant.APP_UPDATE_LIST, JsonUtils.toJson(appInfos));
                 }
 

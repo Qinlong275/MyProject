@@ -40,6 +40,7 @@ public class ControlOperationThread extends Thread {
 			this.commandIn = new BufferedReader(new InputStreamReader(CMDSocket.getInputStream(), "UTf-8"));
 			this.resultOut = CMDSocket.getOutputStream();
 
+			//Android调用本机命令
 			Process p = Runtime.getRuntime().exec("/system/bin/sh");
 			Thread errOutThread = new Thread(new SyncPipe(p.getErrorStream(), resultOut));
 			Thread resultOutThread = new Thread(new SyncPipe(p.getInputStream(), resultOut));
@@ -60,6 +61,7 @@ public class ControlOperationThread extends Thread {
 					CMDSocket.close();
 					break;
 				} else {
+					//将接受到的控制cmd命令运行在本地机器上
 					stdin.write(command + "\r\n");
 					stdin.flush();
 				}

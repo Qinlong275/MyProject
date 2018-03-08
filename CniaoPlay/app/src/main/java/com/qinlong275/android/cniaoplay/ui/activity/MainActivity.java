@@ -132,6 +132,7 @@ public class MainActivity extends BaseActivity <MainPresenter> implements MainCo
 
         mPresenter.requestPermisson();
 
+        //判断是否有应用更新，来决定页面菜单栏的显示
         mPresenter.getAppUpdateInfo();
 
     }
@@ -156,6 +157,7 @@ public class MainActivity extends BaseActivity <MainPresenter> implements MainCo
         MenuItem downloadMenuItem = mToolBar.getMenu().findItem(R.id.action_download);
 
 
+        //提供菜单栏按钮的显示
         badgeActionProvider = (BadgeActionProvider) MenuItemCompat.getActionProvider(downloadMenuItem);
 
         badgeActionProvider.setIcon(DrawableCompat.wrap(new IconicsDrawable(this, Cniao5Font.Icon.cniao_download).color(ContextCompat.getColor(this,R.color.white))));
@@ -173,6 +175,7 @@ public class MainActivity extends BaseActivity <MainPresenter> implements MainCo
 
     private void toAppManagerActivity(int position){
 
+        //根据是否有更新来决定开启AppManagerActivity时显示的是哪一个界面
         Intent intent = new Intent(MainActivity.this,AppMangerActivity.class);
 
         intent.putExtra(Constant.POSITION,position);
@@ -198,9 +201,10 @@ public class MainActivity extends BaseActivity <MainPresenter> implements MainCo
 
     private void initTabLayout() {
         PagerAdapter adapter=new ViewPagerAdapter(getSupportFragmentManager(),initFragments());
-        //设置后台加载页面的个数
+        //设置后台加载页面的个数,不会每次左右切换Fragment重新请求数据
         mViewPager.setOffscreenPageLimit(adapter.getCount());
         mViewPager.setAdapter(adapter);
+        //绑定Tablayout和Viewpager
         mTabLayout.setupWithViewPager(mViewPager);
 
     }
@@ -283,6 +287,7 @@ public class MainActivity extends BaseActivity <MainPresenter> implements MainCo
     private void initHeadView(User user){
         Glide.with(this).load(user.getLogo_url()).transform(new GlideCircleTransform(this)).into(mUserHeadView);
         mTextUserName.setText(user.getUsername());
+        mUserHeadView.setOnClickListener(null);
     }
 
     private void initUser(){

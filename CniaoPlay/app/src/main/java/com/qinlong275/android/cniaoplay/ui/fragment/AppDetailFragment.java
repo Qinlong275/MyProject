@@ -1,6 +1,7 @@
 package com.qinlong275.android.cniaoplay.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.qinlong275.android.cniaoplay.R;
 import com.qinlong275.android.cniaoplay.bean.AppInfo;
@@ -26,6 +29,7 @@ import com.qinlong275.android.cniaoplay.di.module.AppModelModule;
 import com.qinlong275.android.cniaoplay.di.module.AppdetailModule;
 import com.qinlong275.android.cniaoplay.presenter.AppDetaiPresenter;
 import com.qinlong275.android.cniaoplay.presenter.contract.AppinfoContract;
+import com.qinlong275.android.cniaoplay.ui.activity.AppDetailActivity;
 import com.qinlong275.android.cniaoplay.ui.adapter.AppInfoAdapter;
 
 import java.util.Arrays;
@@ -102,6 +106,18 @@ public class AppDetailFragment extends ProgressFragment<AppDetaiPresenter> imple
         mAdapter.addData(appInfo.getSameDevAppInfoList());
         mRecyclerViewSameDev.setAdapter(mAdapter);
 
+        mRecyclerViewSameDev.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                AppInfo appInfo=mAdapter.getItem(position);
+                mAppAplication.setView(view);
+                Intent intent=new Intent(getActivity(), AppDetailActivity.class);
+                //要实现serializable接口的
+                intent.putExtra("appinfo",appInfo);
+                startActivity(intent);
+            }
+        });
+
         /////////////////////////////////////////////
 
         mAdapter = AppInfoAdapter.builder().layout(R.layout.template_appinfo2)
@@ -110,6 +126,18 @@ public class AppDetailFragment extends ProgressFragment<AppDetaiPresenter> imple
         mRecyclerViewRelate.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         mAdapter.addData(appInfo.getRelateAppInfoList());
         mRecyclerViewRelate.setAdapter(mAdapter);
+
+        mRecyclerViewRelate.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                AppInfo appInfo=mAdapter.getItem(position);
+                mAppAplication.setView(view);
+                Intent intent=new Intent(getActivity(), AppDetailActivity.class);
+                //要实现serializable接口的
+                intent.putExtra("appinfo",appInfo);
+                startActivity(intent);
+            }
+        });
 
     }
 

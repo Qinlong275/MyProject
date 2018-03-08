@@ -41,8 +41,6 @@ public class AppManagerPresenter extends BasePresenter<AppManagerContract.IAppMa
         super(iAppManagerModel, appManagerView);
     }
 
-
-
     public void getDownlodingApps(){
 
 

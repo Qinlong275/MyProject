@@ -125,6 +125,7 @@ public class AppDetailActivity extends BaseActivity<AppDetaiPresenter>{
     private void open(){
         int h=DensityUtil.getScreenH(this);
 
+        //延迟属性动画
         ObjectAnimator animator=ObjectAnimator.ofFloat(mViewTemp,"scaleY",1f,(float) h);
         animator.setStartDelay(500);
         animator.setDuration(1000);

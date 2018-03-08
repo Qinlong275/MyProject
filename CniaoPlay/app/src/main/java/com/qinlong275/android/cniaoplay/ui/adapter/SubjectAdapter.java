@@ -22,12 +22,6 @@ import com.qinlong275.android.cniaoplay.common.Constant;
 
 public class SubjectAdapter extends BaseQuickAdapter<Subject,BaseViewHolder> {
 
-
-
-
-
-
-
     public SubjectAdapter() {
         super(R.layout.template_imageview);
     }

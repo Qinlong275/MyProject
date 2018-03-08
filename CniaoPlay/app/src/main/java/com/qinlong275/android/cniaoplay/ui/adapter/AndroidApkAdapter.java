@@ -51,102 +51,104 @@ public class AndroidApkAdapter extends BaseQuickAdapter<AndroidApk,BaseViewHolde
     @Override
     protected void convert(BaseViewHolder helper, final AndroidApk item) {
 
+        if(item!=null){
+            helper.setText(R.id.txt_app_name,item.getAppName());
 
-        helper.setText(R.id.txt_app_name,item.getAppName());
-
-        helper.setImageDrawable(R.id.img_app_icon,item.getDrawable());
-
-
-        helper.addOnClickListener(R.id.btn_action);
-
-        final DownloadProgressButton btn = helper.getView(R.id.btn_action);
-        final TextView txtStatus = helper.getView(R.id.txt_status);
+            helper.setImageDrawable(R.id.img_app_icon,item.getDrawable());
 
 
-        //已下载的
-        if(flag == FLAG_APK){
+            helper.addOnClickListener(R.id.btn_action);
 
-            btn.setTag(R.id.tag_package_name,item.getPackageName());
-            btn.setText("删除");
-
-
-            //判断是否已经安装
-            isInstalled(mContext,item.getPackageName()).subscribe(new Consumer<Boolean>() {
+            final DownloadProgressButton btn = helper.getView(R.id.btn_action);
+            final TextView txtStatus = helper.getView(R.id.txt_status);
 
 
-                @Override
-                public void accept(@NonNull Boolean aBoolean) throws Exception {
-                    btn.setTag(aBoolean);
+            //已下载的
+            if(flag == FLAG_APK){
 
-                    if(aBoolean){
-                        txtStatus.setText("已安装");
-                        btn.setText("删除");
+                btn.setTag(R.id.tag_package_name,item.getPackageName());
+                btn.setText("删除");
+
+
+                //判断是否已经安装
+                isInstalled(mContext,item.getPackageName()).subscribe(new Consumer<Boolean>() {
+
+
+                    @Override
+                    public void accept(@NonNull Boolean aBoolean) throws Exception {
+                        btn.setTag(aBoolean);
+
+                        if(aBoolean){
+                            txtStatus.setText("已安装");
+                            btn.setText("删除");
+                        }
+                        else {
+                            txtStatus.setText("等待安装");
+                            btn.setText("安装");
+                        }
                     }
-                    else {
-                        txtStatus.setText("等待安装");
-                        btn.setText("安装");
-                    }
-                }
-            });
+                });
 
-            //设置按钮点击事件
-            RxView.clicks(btn).subscribe(new Consumer<Object>() {
+                //设置按钮点击事件
+                RxView.clicks(btn).subscribe(new Consumer<Object>() {
 
 
-                @Override
-                public void accept(@NonNull Object o) throws Exception {
+                    @Override
+                    public void accept(@NonNull Object o) throws Exception {
 
 
-                    if(btn.getTag(R.id.tag_package_name).toString().equals(item.getPackageName())){
+                        if(btn.getTag(R.id.tag_package_name).toString().equals(item.getPackageName())){
 
-                        Object obj =  btn.getTag();
+                            Object obj =  btn.getTag();
 
-                        if(obj==null){
+                            if(obj==null){
 
-                            File file=new File(item.getApkPath());
-                            PackageUtils.installApk(mContext,file);
+                                File file=new File(item.getApkPath());
+                                PackageUtils.installApk(mContext,file);
 //
 //                            PackageUtils.install(mContext,item.getApkPath());
 
-                        }
-                        else{
-
-                            boolean isInstall = (boolean) obj;
-                            if(isInstall){
-                                deleteApk(item);
                             }
-                            else {
-                                File file=new File(item.getApkPath());
-                                PackageUtils.installApk(mContext,file);
+                            else{
+
+                                boolean isInstall = (boolean) obj;
+                                if(isInstall){
+                                    deleteApk(item);
+                                }
+                                else {
+                                    File file=new File(item.getApkPath());
+                                    PackageUtils.installApk(mContext,file);
 //                                PackageUtils.install(mContext,item.getApkPath());
+                                }
                             }
                         }
+
                     }
-
-                }
-            });
+                });
 
 
 
+            }
+            //已经安装的
+            else if(flag==FLAG_APP){
+
+                btn.setText("卸载");
+                txtStatus.setText("v"+item.getAppVersionName() +" " +(item.isSystem()?"内置":"第三方")); // size 加进来
+
+                RxView.clicks(btn).subscribe(new Consumer<Object>() {
+
+                    @Override
+                    public void accept(@NonNull Object o) throws Exception {
+
+                        AppUtils.uninstallApk(mContext,item.getPackageName());
+                    }
+                });
+            }
+        }else {
+            //提示没有数据，为空
         }
-        //已经安装的
-        else if(flag==FLAG_APP){
-
-            btn.setText("卸载");
-            txtStatus.setText("v"+item.getAppVersionName() +" " +(item.isSystem()?"内置":"第三方")); // size 加进来
-
-            RxView.clicks(btn).subscribe(new Consumer<Object>() {
-
-                @Override
-                public void accept(@NonNull Object o) throws Exception {
-
-                    AppUtils.uninstallApk(mContext,item.getPackageName());
-                }
-            });
 
 
-
-        }
 
     }
 

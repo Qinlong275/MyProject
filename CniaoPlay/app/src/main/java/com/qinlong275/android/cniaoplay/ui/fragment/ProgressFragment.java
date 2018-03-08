@@ -67,6 +67,7 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
         super.onActivityCreated(savedInstanceState);
         Log.d("Fragment","重建");
         this.mAppAplication = (AppAplication) getActivity().getApplication();
+        //让子类去执行依赖注入Componeent
         setupAcitivtyComponent(mAppAplication.getAppComponent());
         setRealContentView();
 
@@ -75,7 +76,7 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
     }
 
     private void setRealContentView(){
-        //绑定contentView的真实内容，初始时为空
+        //绑定contentView的真实内容，初始时为空,子类决定具体布局
         View realContentView=LayoutInflater.from(getActivity()).inflate(setLayout(),mViewContent,true);
         mUnbinder=  ButterKnife.bind(this, realContentView);
     }
@@ -86,15 +87,6 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
 
     public void showContentView(){
         showView(R.id.view_content);
-    }
-
-    public void showEmptyView(){
-        showView(R.id.view_empty);
-    }
-
-    public void showEmptyView(int resId){
-        showView(R.id.view_empty);
-        mTextError.setText(resId);
     }
 
     public void showEmptyView(String message){

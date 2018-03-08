@@ -36,6 +36,7 @@ public class FileOperationThread extends Thread {
 			this.filesSocket = new Socket(Server.getServerIp(), port); // 连接Socket相当于告诉服务器可以对其进行文件操作
 		//	this.filesSocket.setKeepAlive(true);
 			filesSocket.setTcpNoDelay(true);
+			//被调用者，接收bengbeng，心跳
 			this.talkFilesWithServer = new TalkWithOther(filesSocket,false,true);
 			while (true) {
 				String request = talkFilesWithServer.listen();
@@ -174,7 +175,7 @@ public class FileOperationThread extends Thread {
 	 * @throws IOException
 	 */
 	public void download(String path) throws IOException {
-		BufferedInputStream fileIn;
+		BufferedInputStream fileIn;		//要下载的我的文件
 		try {
 			fileIn = new BufferedInputStream(new FileInputStream(path));
 			talkFilesWithServer.say("OK,You can download.");

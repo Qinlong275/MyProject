@@ -27,13 +27,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         mFragments=fragments;
     }
 
-    private void initFragments() {
-        mFragments.add(new FragmentInfo("推荐",RecommendFragment.class));
-        mFragments.add(new FragmentInfo("排行",ToplistFragment.class));
-        mFragments.add(new FragmentInfo("游戏",GamesFragment.class));
-        mFragments.add(new FragmentInfo("分类",CategoryFragment.class));
-    }
-
     @Override
     public Fragment getItem(int position) {
         try {
